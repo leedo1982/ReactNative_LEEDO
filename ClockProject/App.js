@@ -9,17 +9,28 @@ import {
 
 import moment from "moment";
 
+let randomHex = () => {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: randomHex()
     },
     timeText: {
         color: '#999999',
         fontSize: 50,
     },
 })
+
 class Greeting extends Component {
   render() {
     return (
@@ -35,8 +46,8 @@ export default class ClockApp extends Component {
         this.state = {
             time: moment().format("LTS"),
             timeType : true,
-            colorType : true
-
+            colorType : true,
+            backgroundColor: randomHex()
         };
     }
     render() {
@@ -47,7 +58,7 @@ export default class ClockApp extends Component {
          }, 1000);
 
         return (
-            <View style={this.state.colorType ? {backgroundColor:'black'}:{backgroundColor:'blue'}, styles.container }>
+            <View style={[styles.container, {backgroundColor: this.state.backgroundColor}] }>
                 <StatusBar style={ {backgroundColor: 'transparent'}} />
                 <Text style={styles.timeText}>
                     {this.state.time}
@@ -57,7 +68,7 @@ export default class ClockApp extends Component {
             title="time type change"
             />
             <Button
-            onPress={()=> this.setState({colorType: !this.state.colorType})}
+            onPress={() =>this.setState({backgroundColor: randomHex()})}
             title="background change"
             />
             </View>
