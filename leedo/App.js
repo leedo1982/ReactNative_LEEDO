@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import Navi from './navi';
 import { createStackNavigator } from 'react-navigation';
-import SecondScreen from './SecondScreen'
 import ClockApp from './clock'
 
 class reactNavigationSample extends Component {
